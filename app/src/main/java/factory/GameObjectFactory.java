@@ -10,7 +10,7 @@ import object.MyFish;
  */
 public class GameObjectFactory {
     //创建小型敌方鱼的方法
-  /*  public GameObject creatSmallFish(Resources resources){
+   /*  public GameObject creatSmallFish(Resources resources){
         return new SmallFish(resources);
     }
     //创建大型敌方鱼的方法
@@ -18,7 +18,7 @@ public class GameObjectFactory {
         return new BigFish(resources);
     }
     //创建BOSS型鱼的方法
-    public GameObject createBossFish(Resources resources){
+   public GameObject createBossFish(Resources resources){
         return new BossFish(resources);
     }   */
     //创建玩家鱼的方法

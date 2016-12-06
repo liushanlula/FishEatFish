@@ -46,7 +46,7 @@ public class MyFish extends GameObject implements IMyfish{
     public void initBitmap() {
         // TODO Auto-generated method stub
         myplane = BitmapFactory.decodeResource(resources, R.drawable.fish3);
-        object_width = myplane.getWidth() / 2; // 获得每一帧位图的宽
+        object_width = myplane.getWidth(); // 获得每一帧位图的宽
         object_height = myplane.getHeight(); 	// 获得每一帧位图的高
     }
     // 对象的绘图方法

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -28,8 +29,8 @@ public class MainView extends BaseView  {
     private int bossFishScore; //boss型鱼的积分
     private int sumScore;    //游戏总得分
     private int speedTime;  //游戏速度的倍数
-    private float bg_y;    //背景的坐标
-    private float bg_y2;
+    private float bg_x;    //背景的坐标
+    private float bg_x2;
     private float play_bt_w;
     private float play_bt_h;
    // private float missile_bt_y;  // 原导弹
@@ -54,7 +55,7 @@ public class MainView extends BaseView  {
         myFish = (MyFish) factory.createMyFish(getResources()); //生产玩家鱼
         myFish.setMainView(this);
       /*  for(int i=0;i<SmallFish.sumCount;i++){
-            //生产小型鱼
+            //生产小型敌方鱼
             SmallFish smallFish = (SmallFish)factory.creatSmallFish(getResources());
             enemyFish.add(smallFish);
         }
@@ -178,8 +179,9 @@ public class MainView extends BaseView  {
         scaley = screen_height / background.getHeight();
         play_bt_w = playButton.getWidth();
         play_bt_h = playButton.getHeight()/2;
-        bg_y = 0;
-        bg_y2 = bg_y - screen_height;
+        bg_x = 0;
+        bg_x2 = bg_x - screen_width;
+       // bg_x2 = bg_x - screen_height;
     }
     //初始化游戏对象
      public void initObject() {
@@ -256,8 +258,8 @@ public class MainView extends BaseView  {
             canvas.save();
             // 计算背景图片与屏幕的比例
             canvas.scale(scalex, scaley, 0, 0);
-            canvas.drawBitmap(background, 0, bg_y, paint);   // 绘制背景图
-            canvas.drawBitmap(background2, 0, bg_y2, paint); // 绘制背景图
+            canvas.drawBitmap(background,bg_x,0,paint);   // 绘制背景图
+            canvas.drawBitmap(background2,bg_x2,0, paint); // 绘制背景图
             canvas.restore();
             //绘制按钮
             canvas.save();
@@ -304,19 +306,19 @@ public class MainView extends BaseView  {
     }
     // 背景移动的逻辑函数
     public void viewLogic(){
-        if(bg_y > bg_y2){
-            bg_y += 10;
-            bg_y2 = bg_y - background.getHeight();
+        if(bg_x > bg_x2){
+            bg_x += 10;
+            bg_x2 = bg_x - background.getHeight();
         }
         else{
-            bg_y2 += 10;
-            bg_y = bg_y2 - background.getHeight();
+            bg_x2 += 10;
+            bg_x = bg_x2 - background.getHeight();
         }
-        if(bg_y >= background.getHeight()){
-            bg_y = bg_y2 - background.getHeight();
+        if(bg_x >= background.getHeight()){
+            bg_x = bg_x2 - background.getHeight();
         }
-        else if(bg_y2 >= background.getHeight()){
-            bg_y2 = bg_y - background.getHeight();
+        else if(bg_x2 >= background.getHeight()){
+            bg_x2 = bg_x - background.getHeight();
         }
     }
  /*   // 增加游戏分数的方法
@@ -328,7 +330,7 @@ public class MainView extends BaseView  {
     }     */
     // 播放音效
     public void playSound(int key){
-        sounds.playSound(key, 0);
+        sounds.playSound(3, 0);
     }
     // 线程运行的方法
     @Override
@@ -363,7 +365,7 @@ public class MainView extends BaseView  {
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = 	ConstantUtil.TO_END_VIEW;
+    //    message.what = 	ConstantUtil.TO_END_VIEW;
         message.arg1 = Integer.valueOf(sumScore);
         mainActivity.getHandler().sendMessage(message);
     }

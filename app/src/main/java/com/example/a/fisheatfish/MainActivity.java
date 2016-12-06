@@ -25,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
                 toMainView();
             } else if (msg.what == ConstantUtil.TO_END_VIEW) {
                 toEndView(msg.arg1);
-            } else if (msg.what == ConstantUtil.END_GAME){
-                endGame();
             }
+           /* else if (msg.what == ConstantUtil.END_GAME){
+                endGame();
+            }   */
         }
     };
 
@@ -48,19 +49,18 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(mainView);
         readyView = null;
-
         endView = null;
     }
-   //显示游戏结束的界面
-    public void toEndView(int score){
+    //显示游戏结束的界面
+        public void toEndView(int score){
         if(endView ==null){
-            endView = new EndView(this,sounds);
+            endView =new EndView(this,sounds);
           //  endView.setScore(score);
         }
         setContentView(endView);
         mainView = null;
     }
-    //游戏结束
+  /*  //游戏结束
     public void endGame(){
         if(readyView != null){
             readyView.setThreadFlag(false);
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             endView.setThreadFlag(false);
         }
         this.finish();
-    }
+    }          */
     //getter 和setter方法
     public Handler getHandler(){
         return handler;

@@ -78,7 +78,7 @@ public class ReadyView extends BaseView {
             //判断第一个按钮是否被按下
             if(x>button_x && x<button_x + button.getWidth()
                     && y>button_y && y<button_y + button.getHeight()){
-                sounds.playSound(7,0);
+                sounds.playSound(1,0);
                 isBtChange = true;
                 drawSelf();
                 mainActivity.getHandler().sendEmptyMessage(ConstantUtil.TO_MAIN_VIEW);
@@ -86,7 +86,7 @@ public class ReadyView extends BaseView {
             //判断第二个按钮是否被按下
             else if(x > button_x && x < button_x + button.getWidth()
                     && y > button_y2 && y < button_y2 + button.getHeight()){
-                sounds.playSound(7, 0);
+                sounds.playSound(1, 0);
                 isBtChange2 = true;
                 drawSelf();
                 mainActivity.getHandler().sendEmptyMessage(ConstantUtil.END_GAME);
@@ -94,7 +94,7 @@ public class ReadyView extends BaseView {
             return true;
         }
         //响应屏幕单点移动的消息
-        else if(event.getAction() == MotionEvent.ACTION_DOWN){
+        else if(event.getAction() == MotionEvent.ACTION_MOVE){
             float x = event.getX();
             float y = event.getY();
             if(x > button_x && x < button_x + button.getWidth()
@@ -107,14 +107,13 @@ public class ReadyView extends BaseView {
             if(x > button_x && x < button_x + button.getWidth()
                     && y > button_y2 && y < button_y2 + button.getHeight()) {
                 isBtChange2 = true;
-            }
-            else{
+            } else{
                 isBtChange2 = false;
             }
             return true;
         }
         //响应手指离开屏幕的消息
-        else if(event.getAction() == MotionEvent.ACTION_DOWN){
+        else if(event.getAction() == MotionEvent.ACTION_UP){
             isBtChange = false;
             isBtChange2 = false;
             return true;
